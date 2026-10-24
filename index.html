@@ -4,418 +4,1218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#060914">
-<title>QWERTYMC | Oficjalna strona</title>
+<meta name="theme-color" content="#080b12">
+<meta name="description" content="QWERTYMC — serwer Minecraft 1.21.4. Poznaj rangi, klucze i dołącz do społeczności.">
+<title>QWERTYMC — Serwer Minecraft</title>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
-  --bg:#060914;
-  --panel:#0c1425;
-  --blue:#00aaff;
-  --cyan:#00e5ff;
-  --text:#f1f7ff;
-  --muted:#91a4bd;
+  --bg: #070910;
+  --panel: #101522;
+  --line: rgba(160,190,255,.13);
+  --text: #f4f7ff;
+  --muted: #9aa8c3;
+  --blue: #5b8cff;
+  --cyan: #55e6ff;
+  --purple: #b46bff;
+  --gold: #ffd76b;
+  --green: #7dffbf;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{
-  margin:0;
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body:before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
   background:
-    radial-gradient(ellipse at 50% -15%,#064579 0,transparent 48%),
-    var(--bg);
-  color:var(--text);
-  font-family:Inter,"Segoe UI",Arial,sans-serif;
+    radial-gradient(ellipse at 18% 5%, rgba(49,94,220,.2), transparent 36%),
+    radial-gradient(ellipse at 90% 35%, rgba(116,48,210,.13), transparent 33%),
+    linear-gradient(180deg,#080b13,#070910 60%,#090c14);
 }
-a{color:inherit;text-decoration:none}
-.topbar{
-  position:sticky;top:0;z-index:20;
-  background:#060914eF;
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid #153b58;
+
+body:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .15;
+  background-image:
+    linear-gradient(rgba(150,180,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(150,180,255,.07) 1px,transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom,black,transparent 75%);
 }
-.nav{
-  max-width:1200px;margin:auto;padding:13px 22px;
-  min-height:80px;display:flex;align-items:center;
-  justify-content:space-between;gap:22px;
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+
+/* GÓRNE MENU */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--line);
+  background: rgba(7,9,16,.82);
+  backdrop-filter: blur(18px);
 }
-.logo{
-  font-size:25px;font-weight:1000;letter-spacing:1px;
-  color:var(--cyan);white-space:nowrap;
-  text-shadow:0 0 25px #00aaff55;
+
+.nav {
+  width: min(1160px,calc(100% - 36px));
+  height: 76px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
-.logo small{
-  display:block;color:#8ca9c7;font-size:9px;
-  letter-spacing:4px;margin-top:3px;text-align:center;
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-family: Oxanium,sans-serif;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  font-size: 22px;
 }
-.tabs{
-  display:flex;align-items:center;gap:7px;
-  padding:5px;border:1px solid #19334b;
-  border-radius:12px;background:#080e1a;
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg,var(--blue),var(--purple));
+  box-shadow: 0 0 26px #5b8cff50;
+  font-size: 21px;
 }
-.tabs a{
-  padding:12px 18px;border-radius:8px;
-  font-size:12px;font-weight:900;letter-spacing:1px;
-  color:#a9bfd7;transition:.2s;
+
+.gradient {
+  background: linear-gradient(100deg,#fff 5%,#9dbbff 38%,#c5a2ff 72%,#65eaff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-.tabs a:hover,.tabs a.active{
-  color:white;background:linear-gradient(120deg,#007bc5,#00bde8);
-  box-shadow:0 0 20px #009dff25;
+
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
-.discord-link{
-  font-size:12px;font-weight:800;color:var(--cyan);
-  border:1px solid #087db7;border-radius:9px;padding:12px;
-  white-space:nowrap;
+
+.navlinks a {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 15px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  transition: .25s;
 }
-.page{display:none;animation:show .35s ease}
-.page.active{display:block}
-@keyframes show{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
+
+.navlinks a:hover,
+.navlinks a.active {
+  color: #fff;
+  background: rgba(91,140,255,.12);
+  border-color: rgba(91,140,255,.24);
+  transform: translateY(-1px);
 }
-.container{width:min(1120px,92%);margin:auto}
-.hero{
-  min-height:480px;padding:80px 0 65px;
-  display:grid;grid-template-columns:1.3fr .8fr;
-  align-items:center;gap:40px;
+
+.navlinks .discord-nav {
+  background: #5865f2;
+  color: #fff;
+  border-color: #5865f2;
 }
-.tag{
-  display:inline-flex;align-items:center;gap:9px;
-  border:1px solid #14638c;background:#071a2b;
-  color:#80dfff;padding:9px 13px;border-radius:30px;
-  font-size:11px;font-weight:800;letter-spacing:1.5px;
+
+.menu-btn {
+  display: none;
+  border: 1px solid var(--line);
+  color: white;
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
 }
-.dot{
-  width:7px;height:7px;border-radius:50%;
-  background:#4cf5a2;box-shadow:0 0 12px #4cf5a2;
+
+main {
+  width: min(1160px,calc(100% - 36px));
+  margin: 0 auto;
 }
-h1{
-  font-size:clamp(48px,7vw,83px);
-  line-height:.98;letter-spacing:-3px;margin:24px 0;
+
+/* EKRAN GŁÓWNY */
+
+.hero {
+  min-height: 650px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 50px;
+  padding: 72px 0 80px;
+  position: relative;
 }
-.gradient{
-  background:linear-gradient(90deg,#fff,#00c8ff);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(85,230,255,.22);
+  background: rgba(85,230,255,.06);
+  color: #a8f4ff;
+  border-radius: 999px;
+  padding: 9px 13px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
 }
-.desc{color:var(--muted);font-size:15px;line-height:1.9;max-width:510px}
-.server-box{
-  margin-top:27px;display:flex;align-items:center;
-  gap:14px;flex-wrap:wrap;
-  border:1px solid #174363;background:#091425;
-  border-radius:13px;padding:15px;max-width:500px;
+
+.pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green);
+  animation: pulse 1.7s infinite;
+  flex-shrink: 0;
 }
-.server-icon{
-  display:grid;place-items:center;width:45px;height:45px;
-  border-radius:10px;background:#092a43;border:1px solid #087bb5;
-  color:var(--cyan);font-size:24px;
+
+h1,h2,h3,.rank-name {
+  font-family: Oxanium,Inter,sans-serif;
 }
-.server-text{flex:1;min-width:160px}
-.server-text small{display:block;color:var(--muted);margin-bottom:5px}
-.server-text strong{font-size:14px;overflow-wrap:anywhere}
-button,.button{
-  cursor:pointer;border:0;border-radius:9px;padding:13px 17px;
-  background:linear-gradient(110deg,#008ee5,#00d5f5);
-  color:#00111e;font-weight:900;font-size:12px;
-  transition:.2s;display:inline-block;text-align:center;
+
+h1 {
+  font-size: clamp(48px,7vw,86px);
+  line-height: .98;
+  letter-spacing: -2px;
+  margin: 25px 0 22px;
+  font-weight: 800;
 }
-button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 7px 25px #00baff30}
-#copyStatus{font-size:12px;color:#65f3b0;margin-top:9px;min-height:17px}
-.hero-art{
-  position:relative;min-height:320px;display:grid;place-items:center;
-  border:1px solid #16405d;border-radius:22px;overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 45%,#005b9c55,transparent 48%),
-    linear-gradient(145deg,#0c1a30,#060b16);
+
+.hero p {
+  max-width: 570px;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 16px;
 }
-.hero-art:before,.hero-art:after{
-  content:"";position:absolute;border:1px solid #00baff30;
-  border-radius:50%;width:240px;height:240px;
-  animation:orbit 18s linear infinite;
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
 }
-.hero-art:after{width:300px;height:300px;animation-direction:reverse}
-@keyframes orbit{to{transform:rotate(360deg)}}
-.cube{
-  z-index:1;font-size:100px;
-  filter:drop-shadow(0 0 25px #00baff70);
-  animation:float 3s ease-in-out infinite;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 19px;
+  border-radius: 13px;
+  font-weight: 800;
+  font-size: 13px;
+  border: 1px solid var(--line);
+  transition: transform .25s,box-shadow .25s,background .25s;
+  cursor: pointer;
 }
-@keyframes float{50%{transform:translateY(-12px)}}
-.art-label{
-  position:absolute;bottom:20px;z-index:2;
-  color:#b7ddf8;letter-spacing:4px;font-size:11px;font-weight:900;
+
+.btn:hover { transform: translateY(-3px); }
+
+.btn-primary {
+  background: linear-gradient(115deg,#4e7dff,#8a5cff);
+  border-color: transparent;
+  box-shadow: 0 10px 30px #5b72ff32;
 }
-.info-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:14px;margin:0 0 28px;
+
+.btn-primary:hover {
+  box-shadow: 0 12px 35px #5b72ff58;
 }
-.info-card{
-  background:#0a1424;border:1px solid #173750;
-  border-radius:12px;padding:20px;
+
+.btn-secondary { background: rgba(255,255,255,.035); }
+
+.server-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 35px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 12px;
 }
-.info-card small{display:block;color:var(--muted);margin-bottom:9px}
-.info-card strong{font-size:15px}
-.content{padding:44px 0 75px}
-.heading{text-align:center;margin-bottom:34px}
-.heading .eyebrow{
-  font-size:11px;color:var(--cyan);font-weight:900;
-  letter-spacing:3px;text-transform:uppercase;
+
+.server-ip {
+  font-family: Oxanium,monospace;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
 }
-.heading h2{font-size:clamp(32px,5vw,47px);margin:13px 0}
-.heading p{color:var(--muted);line-height:1.7;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.card{
-  --accent:#00baff;
-  background:linear-gradient(145deg,#101c30,#080d18 78%);
-  border:1px solid color-mix(in srgb,var(--accent) 70%,transparent);
-  border-radius:15px;padding:25px;min-width:0;
-  transition:transform .22s,box-shadow .22s;
+
+.copy-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: #b7c8ff;
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  transition: .2s;
 }
-.card:hover{transform:translateY(-5px);box-shadow:0 15px 40px #0006,0 0 25px color-mix(in srgb,var(--accent) 12%,transparent)}
-.vip{--accent:#ffd34e}
-.elite{--accent:#c16cff}
-.sponsor{--accent:#00d8ff}
-.epic{--accent:#c16cff}
-.legendary{--accent:#ffd34e}
-.anarchy{--accent:#ff5477}
-.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.symbol{
-  width:48px;height:48px;display:grid;place-items:center;
-  border:1px solid var(--accent);border-radius:12px;
-  background:color-mix(in srgb,var(--accent) 10%,transparent);
-  font-size:24px;
+
+.copy-btn:hover {
+  background: #5b8cff20;
+  border-color: #5b8cff70;
 }
-.pill{
-  font-size:9px;font-weight:900;letter-spacing:1px;
-  color:var(--accent);border:1px solid var(--accent);
-  border-radius:20px;padding:6px 9px;
+
+/* ANIMOWANA KOSTKA 3D */
+
+.hero-art {
+  position: relative;
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  perspective: 1000px;
 }
-.card h3{font-size:22px;margin:20px 0 7px;color:var(--accent)}
-.card .sub{font-size:12px;color:var(--muted);margin-bottom:20px}
-.perk-title{font-size:11px;font-weight:900;color:#d8e8f8;letter-spacing:1px}
-ul{padding:0;list-style:none;margin:12px 0}
-li{font-size:13px;color:#bfd0e3;line-height:1.6;margin:11px 0}
-li:before{content:"✓";color:var(--accent);font-weight:900;margin-right:10px}
-.price-title{
-  border-top:1px solid #22334a;padding-top:17px;
-  margin-top:20px;color:var(--muted);font-size:11px;
-  text-transform:uppercase;letter-spacing:1px;
+
+.orb {
+  position: absolute;
+  width: min(380px,80vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%,#456fff44,transparent 60%);
+  filter: blur(12px);
+  animation: float 7s ease-in-out infinite;
 }
-.prices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.price{
-  background:#080e19;border:1px solid #26364b;
-  border-radius:9px;padding:12px 7px;text-align:center;
+
+.cube-wrap {
+  width: 290px;
+  height: 290px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  animation: float 6s ease-in-out infinite;
 }
-.price small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}
-.price strong{font-size:17px;color:white}
-.key-price{font-size:30px;font-weight:1000;margin-top:15px;color:white}
-.key-price small{font-size:12px;color:var(--muted);font-weight:500}
-.notice{
-  margin-top:26px;padding:19px;border-radius:12px;
-  background:#091a2b;border:1px solid #17496b;
-  color:#bfd4e9;font-size:13px;line-height:1.8;
+
+.cube {
+  width: 190px;
+  height: 190px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-24deg) rotateY(35deg);
+  animation: rotateCube 18s linear infinite;
 }
-.notice strong{color:var(--cyan)}
-.notice a{color:var(--cyan);font-weight:900;text-decoration:underline}
-footer{
-  border-top:1px solid #17334c;text-align:center;
-  padding:30px 16px;color:#7e96b1;font-size:12px;line-height:2;
+
+.face {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border: 2px solid #91b5ffb0;
+  background: linear-gradient(135deg,#477bff35,#9c5aff15);
+  box-shadow: inset 0 0 35px #5b8cff20,0 0 30px #5b8cff14;
+  backdrop-filter: blur(3px);
 }
-footer strong{color:var(--cyan);letter-spacing:2px}
-@media(max-width:800px){
-  .nav{flex-direction:column;gap:14px}
-  .hero{grid-template-columns:1fr;padding-top:50px}
-  .hero-art{min-height:250px}
-  .grid{grid-template-columns:1fr}
-  .info-grid{grid-template-columns:1fr}
+
+.face.front  { transform: translateZ(95px); }
+.face.back   { transform: rotateY(180deg) translateZ(95px); }
+.face.right  { transform: rotateY(90deg) translateZ(95px); }
+.face.left   { transform: rotateY(-90deg) translateZ(95px); }
+.face.top    { transform: rotateX(90deg) translateZ(95px); }
+.face.bottom { transform: rotateX(-90deg) translateZ(95px); }
+
+.cube-logo {
+  position: absolute;
+  font-family: Oxanium,sans-serif;
+  font-weight: 800;
+  font-size: 38px;
+  letter-spacing: 2px;
+  color: white;
+  text-shadow: 0 0 22px #5b8cff;
+  transform: translateZ(105px);
+  z-index: 3;
 }
-@media(max-width:430px){
-  .tabs{width:100%;justify-content:space-between}
-  .tabs a{padding:11px 12px;font-size:10px}
-  .discord-link{display:none}
-  h1{letter-spacing:-2px}
-  .server-box{align-items:flex-start}
-  .server-box button{width:100%}
+
+.float-card {
+  position: absolute;
+  border: 1px solid var(--line);
+  background: rgba(15,21,36,.9);
+  backdrop-filter: blur(14px);
+  padding: 13px 16px;
+  border-radius: 14px;
+  box-shadow: 0 15px 45px #0005;
+  animation: float 5s ease-in-out infinite;
+}
+
+.float-card strong {
+  display: block;
+  font-size: 13px;
+}
+
+.float-card span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.float-one { top: 48px; right: 0; }
+.float-two { bottom: 55px; left: 0; animation-delay: -2s; }
+
+/* SEKCJE */
+
+.section { padding: 55px 0 70px; }
+
+.section-head {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.kicker {
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: clamp(30px,4vw,44px);
+  margin: 12px 0 10px;
+  letter-spacing: -.7px;
+}
+
+.section-head p {
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+  margin: 0 0 15px;
+}
+
+.stat {
+  padding: 21px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: linear-gradient(135deg,#131a2a9c,#0e1320b8);
+  text-align: center;
+}
+
+.stat b {
+  display: block;
+  font: 800 24px Oxanium,sans-serif;
+}
+
+.stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 18px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  background: linear-gradient(155deg,rgba(20,28,46,.96),rgba(11,15,25,.97));
+  transition: transform .3s,border-color .3s,box-shadow .3s;
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,var(--accent,var(--blue)),transparent);
+  opacity: .8;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  border-color: color-mix(in srgb,var(--accent,var(--blue)) 55%,transparent);
+  box-shadow: 0 18px 50px #0005;
+}
+
+.rank-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.rank-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb,var(--accent) 16%,transparent);
+  border: 1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  font-size: 23px;
+}
+
+.tag {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  border-radius: 999px;
+  padding: 7px 9px;
+}
+
+.rank-name {
+  font-size: 25px;
+  font-weight: 800;
+  margin: 20px 0 5px;
+  color: var(--accent);
+}
+
+.rank-desc {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+
+.perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 23px;
+  display: grid;
+  gap: 11px;
+}
+
+.perks li {
+  font-size: 12px;
+  color: #d7deee;
+  display: flex;
+  gap: 9px;
+  line-height: 1.5;
+}
+
+.perks li:before {
+  content: "✓";
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.prices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-bottom: 17px;
+}
+
+.price {
+  background: #070a12a8;
+  border: 1px solid var(--line);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.price span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.price b { font: 700 19px Oxanium,sans-serif; }
+
+.card .btn {
+  width: 100%;
+  font-size: 12px;
+}
+
+.key-icon {
+  font-size: 29px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.key-name {
+  font: 800 22px Oxanium,sans-serif;
+  margin-bottom: 7px;
+}
+
+.key-desc {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  min-height: 42px;
+}
+
+.key-price {
+  font: 800 27px Oxanium,sans-serif;
+  margin: 19px 0;
+  color: var(--accent);
+}
+
+.key-price small {
+  font: 500 11px Inter,sans-serif;
+  color: var(--muted);
+}
+
+.notice {
+  margin-top: 20px;
+  border: 1px solid rgba(91,140,255,.2);
+  background: rgba(91,140,255,.06);
+  border-radius: 15px;
+  padding: 17px 19px;
+  color: #c8d5f5;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* DOLNY PANEL */
+
+.join-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 28px;
+  border-radius: 22px;
+  border: 1px solid rgba(91,140,255,.25);
+  background: radial-gradient(ellipse at 0 0,#426fff20,transparent 55%),#111726;
+  margin-bottom: 65px;
+}
+
+.join-box h3 {
+  font-size: 25px;
+  margin: 0 0 8px;
+}
+
+.join-box p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* STOPKA I POWIADOMIENIE */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 26px 18px;
+  color: #73809a;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+footer strong { color: #aab8d6; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s ease,transform .7s cubic-bezier(.2,.75,.25,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Powiadomienie nie blokuje strony i znika automatycznie */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  max-width: calc(100vw - 32px);
+  transform: translate(-50%,18px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  background: #141c2d;
+  border: 1px solid #527aff75;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 12px 40px #0008;
+  font-size: 12px;
+  text-align: center;
+  transition: opacity .3s,transform .3s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%,0);
+}
+
+@keyframes pulse {
+  50% { opacity: .45; transform: scale(.75); }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-13px); }
+}
+
+@keyframes rotateCube {
+  from { transform: rotateX(-24deg) rotateY(0deg); }
+  to { transform: rotateX(336deg) rotateY(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,*:before,*:after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* TABLETY */
+
+@media (max-width:850px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 65px;
+    gap: 10px;
+  }
+
+  .hero-copy { text-align: center; }
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .actions,.server-line { justify-content: center; }
+  .hero-art { min-height: 370px; }
+
+  .cards { grid-template-columns: repeat(2,minmax(0,1fr)); }
+
+  .cards .card:last-child:nth-child(odd) {
+    grid-column: 1/-1;
+    max-width: 500px;
+    width: 100%;
+    justify-self: center;
+  }
+}
+
+/* TELEFONY */
+
+@media (max-width:600px) {
+  .nav {
+    height: 66px;
+    width: calc(100% - 24px);
+  }
+
+  .brand { font-size: 18px; }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .menu-btn { display: block; }
+
+  .navlinks {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 12px;
+    right: 12px;
+    padding: 10px;
+    background: #0d1220;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    box-shadow: 0 15px 40px #0008;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navlinks.open { display: flex; }
+  .navlinks a { text-align: center; }
+
+  .hero {
+    min-height: unset;
+    padding: 57px 0 40px;
+  }
+
+  h1 { font-size: 53px; }
+  .hero p { font-size: 14px; }
+  .hero-art { min-height: 320px; }
+
+  .cube {
+    width: 140px;
+    height: 140px;
+  }
+
+  .face {
+    width: 140px;
+    height: 140px;
+  }
+
+  .face.front  { transform: translateZ(70px); }
+  .face.back   { transform: rotateY(180deg) translateZ(70px); }
+  .face.right  { transform: rotateY(90deg) translateZ(70px); }
+  .face.left   { transform: rotateY(-90deg) translateZ(70px); }
+  .face.top    { transform: rotateX(90deg) translateZ(70px); }
+  .face.bottom { transform: rotateX(-90deg) translateZ(70px); }
+
+  .cube-logo {
+    font-size: 28px;
+    transform: translateZ(78px);
+  }
+
+  .float-one { right: 0; top: 25px; }
+  .float-two { left: 0; bottom: 30px; }
+
+  .section { padding: 42px 0 50px; }
+  .cards { grid-template-columns: 1fr; }
+
+  .cards .card:last-child:nth-child(odd) {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .stats { gap: 8px; }
+  .stat { padding: 16px 8px; }
+  .stat b { font-size: 20px; }
+  .stat span { font-size: 10px; }
+
+  .join-box {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 22px;
+  }
+
+  .prices { gap: 7px; }
+  .card { padding: 21px; }
+  main { width: calc(100% - 24px); }
 }
 </style>
 </head>
+
 <body>
+
 <header class="topbar">
-  <nav class="nav">
-    <a class="logo" href="#strona" aria-label="QWERTYMC — strona główna">
-      QWERTYMC<small>MINECRAFT NETWORK</small>
+  <nav class="nav" aria-label="Nawigacja główna">
+
+    <a class="brand" href="#glowny" aria-label="QWERTYMC — główny">
+      <span class="brand-mark">Q</span>
+      <span>QWERTY<span class="gradient">MC</span></span>
     </a>
-    <div class="tabs" aria-label="Nawigacja główna">
-      <a href="#strona" data-page="strona" class="active">STRONA</a>
-      <a href="#rangi" data-page="rangi">RANGI</a>
-      <a href="#klucze" data-page="klucze">KLUCZE</a>
+
+    <button class="menu-btn" id="menuBtn"
+      aria-expanded="false" aria-label="Otwórz menu">☰</button>
+
+    <div class="navlinks" id="navlinks">
+      <a href="#glowny" class="active">Główny</a>
+      <a href="#rangi">Rangi</a>
+      <a href="#klucze">Klucze</a>
+      <a href="https://discord.gg/mRmsYtuV3n"
+         target="_blank" rel="noopener" class="discord-nav">Discord ↗</a>
     </div>
-    <a class="discord-link" href="https://discord.gg/mRmsYtuV3n" target="_blank" rel="noopener noreferrer">DISCORD ↗</a>
+
   </nav>
 </header>
 
 <main>
-<section class="page active" id="page-strona">
-  <div class="container">
-    <div class="hero">
-      <div>
-        <div class="tag"><span class="dot"></span> SERWER MINECRAFT 1.21.4</div>
-        <h1>Witaj na<br><span class="gradient">QWERTYMC!</span></h1>
-        <p class="desc">Dołącz do gry, rozwijaj się i zbuduj swoją historię. Czekamy na Ciebie na serwerze!</p>
-        <div class="server-box">
-          <div class="server-icon">⌘</div>
-          <div class="server-text">
-            <small>ADRES SERWERA</small>
-            <strong>qwertymcpl.aternos.me</strong>
-          </div>
-          <button id="copyButton" type="button">KOPIUJ IP</button>
+
+  <!-- GŁÓWNY -->
+  <section class="hero" id="glowny">
+
+    <div class="hero-copy reveal">
+      <div class="eyebrow">
+        <span class="pulse"></span>
+        Minecraft Java · wersja 1.21.4
+      </div>
+
+      <h1>Witaj na<br><span class="gradient">QWERTYMC!</span></h1>
+
+      <p>
+        Wskakuj na serwer, rozwijaj się, zdobywaj klucze
+        i pokaż, na co Cię stać. Twoja przygoda zaczyna się tutaj.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="#dolacz">⚡ Dołącz do serwera</a>
+        <a class="btn btn-secondary" href="#rangi">Sprawdź rangi →</a>
+      </div>
+
+      <div class="server-line">
+        <span class="pulse"></span>
+        <span>ADRES SERWERA</span>
+        <span class="server-ip">qwertymcpl.aternos.me</span>
+        <button class="copy-btn" id="copyBtn">Kopiuj IP</button>
+      </div>
+    </div>
+
+    <div class="hero-art reveal" aria-label="Animowana kostka QWERTYMC">
+      <div class="orb"></div>
+
+      <div class="cube-wrap">
+        <div class="cube">
+          <div class="face front"></div>
+          <div class="face back"></div>
+          <div class="face right"></div>
+          <div class="face left"></div>
+          <div class="face top"></div>
+          <div class="face bottom"></div>
+          <div class="cube-logo">QMC</div>
         </div>
-        <div id="copyStatus" role="status" aria-live="polite"></div>
       </div>
-      <div class="hero-art">
-        <div class="cube" aria-hidden="true">⛏️</div>
-        <div class="art-label">YOUR WORLD. YOUR RULES.</div>
+
+      <div class="float-card float-one">
+        <strong>✦ QWERTYMC</strong>
+        <span>Twoja kolejna przygoda</span>
+      </div>
+
+      <div class="float-card float-two">
+        <strong>◈ Wersja 1.21.4</strong>
+        <span>Dołącz i graj ze znajomymi</span>
       </div>
     </div>
-    <div class="info-grid">
-      <div class="info-card"><small>ADRES SERWERA</small><strong>qwertymcpl.aternos.me</strong></div>
-      <div class="info-card"><small>WERSJA GRY</small><strong>Java Edition 1.21.4</strong></div>
-      <div class="info-card"><small>SPOŁECZNOŚĆ</small><strong><a href="https://discord.gg/mRmsYtuV3n" target="_blank" rel="noopener noreferrer">Dołącz na Discord ↗</a></strong></div>
+
+  </section>
+
+  <!-- STATYSTYKI -->
+  <section class="section reveal">
+
+    <div class="stats">
+      <div class="stat">
+        <b>1.21.4</b>
+        <span>WERSJA MINECRAFT</span>
+      </div>
+
+      <div class="stat">
+        <b>Aternos</b>
+        <span>HOSTING SERWERA</span>
+      </div>
+
+      <div class="stat">
+        <b>QMC</b>
+        <span>TWÓJ NOWY ŚWIAT</span>
+      </div>
     </div>
+
     <div class="notice">
-      <strong>WAŻNE — ZAKUP RANG</strong><br>
-      Jeśli chcesz kupić rangę, utwórz ticket na Discordzie i ustal szczegóły z administracją.<br>
-      <a href="https://discord.gg/mRmsYtuV3n" target="_blank" rel="noopener noreferrer">OTWÓRZ DISCORD →</a>
+      Serwer działa na Aternosie, więc jego dostępność zależy od tego,
+      czy został uruchomiony.
     </div>
-  </div>
-</section>
 
-<section class="page" id="page-rangi">
-  <div class="container content">
-    <div class="heading">
-      <div class="eyebrow">ULEPSZ SWOJĄ ROZGRYWKĘ</div>
-      <h2>Sklep <span class="gradient">rang</span></h2>
-      <p>Wybierz rangę dopasowaną do swojego stylu gry.</p>
-    </div>
-    <div class="grid">
-      <article class="card vip">
-        <div class="card-top"><div class="symbol">♛</div><span class="pill">VIP</span></div>
-        <h3>RANGA VIP</h3><div class="sub">Podstawowe przywileje</div>
-        <div class="perk-title">PRZYWILEJE</div>
-        <ul><li>Żółty nick na tabie i na czacie</li><li>Dostęp do komendy /kit</li></ul>
-        <div class="price-title">CENNIK</div>
-        <div class="prices"><div class="price"><small>30 DNI</small><strong>5 zł</strong></div><div class="price"><small>356 DNI</small><strong>10 zł</strong></div></div>
-      </article>
-      <article class="card elite">
-        <div class="card-top"><div class="symbol">✦</div><span class="pill">ELITA</span></div>
-        <h3>RANGA ELITA</h3><div class="sub">Więcej możliwości</div>
-        <div class="perk-title">PRZYWILEJE</div>
-        <ul><li>Zestaw elita</li><li>Fioletowy nick na tabie i na czacie</li><li>Dostęp do komendy /ec</li></ul>
-        <div class="price-title">CENNIK</div>
-        <div class="prices"><div class="price"><small>30 DNI</small><strong>10 zł</strong></div><div class="price"><small>356 DNI</small><strong>30 zł</strong></div></div>
-      </article>
-      <article class="card sponsor">
-        <div class="card-top"><div class="symbol">⚡</div><span class="pill">SPONSOR</span></div>
-        <h3>RANGA SPONSOR</h3><div class="sub">Najwyższy poziom</div>
-        <div class="perk-title">PRZYWILEJE</div>
-        <ul><li>Najlepszy kit</li><li>Niebieski nick na czacie i na tabie</li><li>Dostęp do komendy /ec</li><li>Możliwość uzyskania przysługi od admina</li></ul>
-        <div class="price-title">CENNIK</div>
-        <div class="prices"><div class="price"><small>30 DNI</small><strong>20 zł</strong></div><div class="price"><small>356 DNI</small><strong>50 zł</strong></div></div>
-      </article>
-    </div>
-    <div class="notice"><strong>JAK KUPIĆ?</strong><br>Utwórz ticket na Discordzie, aby ustalić zakup rangi z administracją.<br><a href="https://discord.gg/mRmsYtuV3n" target="_blank" rel="noopener noreferrer">PRZEJDŹ NA DISCORD →</a></div>
-  </div>
-</section>
+  </section>
 
-<section class="page" id="page-klucze">
-  <div class="container content">
-    <div class="heading">
-      <div class="eyebrow">OTWÓRZ NOWE MOŻLIWOŚCI</div>
-      <h2>Klucze <span class="gradient">serwerowe</span></h2>
-      <p>Sprawdź dostępne klucze na QWERTYMC.</p>
+  <!-- RANGI -->
+  <section class="section" id="rangi">
+
+    <div class="section-head reveal">
+      <div class="kicker">Wybierz swój poziom</div>
+      <h2>Rangi serwerowe</h2>
+      <p>
+        Wybierz rangę i sprawdź dostępne dodatki.
+        Zakup oraz szczegóły ustalisz przez ticket na naszym Discordzie.
+      </p>
     </div>
-    <div class="grid">
-      <article class="card epic">
-        <div class="card-top"><div class="symbol">⚿</div><span class="pill">EPICKI</span></div>
-        <h3>Klucz epicki</h3>
-        <div class="sub">Klucz serwerowy</div>
-        <div class="price-title">CENA</div>
-        <div class="key-price">10k</div>
+
+    <div class="cards">
+
+      <article class="card reveal" style="--accent:#ffd85c">
+        <div class="rank-top">
+          <div class="rank-icon">✦</div>
+          <span class="tag">Startowa</span>
+        </div>
+
+        <div class="rank-name">VIP</div>
+        <p class="rank-desc">Dodatkowe udogodnienia na serwerze.</p>
+
+        <ul class="perks">
+          <li>Żółty nick na tabliście i czacie</li>
+          <li>Dostęp do komendy <code>/kit</code></li>
+        </ul>
+
+        <div class="prices">
+          <div class="price">
+            <span>30 dni</span>
+            <b>5 zł</b>
+          </div>
+          <div class="price">
+            <span>356 dni</span>
+            <b>10 zł</b>
+          </div>
+        </div>
+
+        <a class="btn btn-secondary"
+           href="https://discord.gg/mRmsYtuV3n"
+           target="_blank" rel="noopener">Kup przez Discord ↗</a>
       </article>
-      <article class="card legendary">
-        <div class="card-top"><div class="symbol">⚿</div><span class="pill">LEGENDARNY</span></div>
-        <h3>Klucz legendarny</h3>
-        <div class="sub">Klucz serwerowy</div>
-        <div class="price-title">CENA</div>
-        <div class="key-price">40</div>
+
+      <article class="card reveal" style="--accent:#c18aff">
+        <div class="rank-top">
+          <div class="rank-icon">✧</div>
+          <span class="tag">Popularna</span>
+        </div>
+
+        <div class="rank-name">ELITA</div>
+        <p class="rank-desc">Więcej możliwości i własny styl.</p>
+
+        <ul class="perks">
+          <li>Zestaw Elita</li>
+          <li>Fioletowy nick na tabliście i czacie</li>
+          <li>Dostęp do komendy <code>/ec</code></li>
+        </ul>
+
+        <div class="prices">
+          <div class="price">
+            <span>30 dni</span>
+            <b>10 zł</b>
+          </div>
+          <div class="price">
+            <span>356 dni</span>
+            <b>30 zł</b>
+          </div>
+        </div>
+
+        <a class="btn btn-secondary"
+           href="https://discord.gg/mRmsYtuV3n"
+           target="_blank" rel="noopener">Kup przez Discord ↗</a>
       </article>
-      <article class="card anarchy">
-        <div class="card-top"><div class="symbol">⚿</div><span class="pill">ANARCHICZNY</span></div>
-        <h3>Klucz anarchiczny</h3>
-        <div class="sub">Klucz serwerowy</div>
-        <div class="price-title">CENA</div>
-        <div class="key-price">80k</div>
+
+      <article class="card reveal" style="--accent:#69b9ff">
+        <div class="rank-top">
+          <div class="rank-icon">⬡</div>
+          <span class="tag">Premium</span>
+        </div>
+
+        <div class="rank-name">SPONSOR</div>
+        <p class="rank-desc">Najlepszy zestaw i dodatkowe korzyści.</p>
+
+        <ul class="perks">
+          <li>Najlepszy kit</li>
+          <li>Niebieski nick na czacie i tabliście</li>
+          <li>Dostęp do komendy <code>/ec</code></li>
+          <li>Możliwość uzyskania przysługi od admina</li>
+        </ul>
+
+        <div class="prices">
+          <div class="price">
+            <span>30 dni</span>
+            <b>20 zł</b>
+          </div>
+          <div class="price">
+            <span>356 dni</span>
+            <b>50 zł</b>
+          </div>
+        </div>
+
+        <a class="btn btn-secondary"
+           href="https://discord.gg/mRmsYtuV3n"
+           target="_blank" rel="noopener">Kup przez Discord ↗</a>
       </article>
+
     </div>
-    <div class="notice"><strong>CHCESZ KUPIĆ KLUCZ?</strong><br>Zapytaj administrację na Discordzie o dostępność i szczegóły.<br><a href="https://discord.gg/mRmsYtuV3n" target="_blank" rel="noopener noreferrer">OTWÓRZ DISCORD →</a></div>
-  </div>
-</section>
+
+    <div class="notice reveal">
+      Zakup rangi: wejdź na Discord, otwórz ticket i ustal szczegóły
+      z administracją. Przed płatnością potwierdź aktualne warunki
+      oraz czas trwania rangi.
+    </div>
+
+  </section>
+
+  <!-- KLUCZE -->
+  <section class="section" id="klucze">
+
+    <div class="section-head reveal">
+      <div class="kicker">Otwórz coś wyjątkowego</div>
+      <h2>Klucze</h2>
+      <p>
+        Sprawdź ceny kluczy i zapytaj administrację na Discordzie,
+        jak je zdobyć.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <article class="card reveal" style="--accent:#6dffb2">
+        <span class="key-icon">🗝️</span>
+        <div class="key-name">EPIC</div>
+        <div class="key-desc">
+          Klucz dla graczy, którzy chcą spróbować szczęścia.
+        </div>
+        <div class="key-price">10k <small>waluty serwerowej</small></div>
+        <a class="btn btn-secondary"
+           href="https://discord.gg/mRmsYtuV3n"
+           target="_blank" rel="noopener">Zapytaj na Discordzie ↗</a>
+      </article>
+
+      <article class="card reveal" style="--accent:#8eb7ff">
+        <span class="key-icon">🔑</span>
+        <div class="key-name">LEGENDARY</div>
+        <div class="key-desc">
+          Wyższy poziom nagród — sprawdź szczegóły na serwerze.
+        </div>
+        <div class="key-price">40k <small>waluty serwerowej</small></div>
+        <a class="btn btn-secondary"
+           href="https://discord.gg/mRmsYtuV3n"
+           target="_blank" rel="noopener">Zapytaj na Discordzie ↗</a>
+      </article>
+
+      <article class="card reveal" style="--accent:#ff8d8d">
+        <span class="key-icon">💠</span>
+        <div class="key-name">ANARCHIC</div>
+        <div class="key-desc">
+          Klucz dla tych, którzy celują w mocniejsze nagrody.
+        </div>
+        <div class="key-price">80k <small>waluty serwerowej</small></div>
+        <a class="btn btn-secondary"
+           href="https://discord.gg/mRmsYtuV3n"
+           target="_blank" rel="noopener">Zapytaj na Discordzie ↗</a>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- DOŁĄCZANIE -->
+  <section class="join-box reveal" id="dolacz">
+
+    <div>
+      <h3>Widzimy się na QWERTYMC?</h3>
+      <p>
+        Skopiuj adres serwera i dołącz w Minecraft Java 1.21.4.<br>
+        Masz pytania? Odezwij się na Discordzie.
+      </p>
+    </div>
+
+    <div class="actions" style="margin:0">
+      <button class="btn btn-primary" id="copyBtnBottom">Kopiuj IP</button>
+      <a class="btn btn-secondary"
+         href="https://discord.gg/mRmsYtuV3n"
+         target="_blank" rel="noopener">Otwórz Discord ↗</a>
+    </div>
+
+  </section>
+
 </main>
 
 <footer>
-  <strong>QWERTYMC</strong><br>
-  Minecraft Java Edition 1.21.4 · Oficjalna strona serwera<br>
-  <a href="https://discord.gg/mRmsYtuV3n" target="_blank" rel="noopener noreferrer">Discord</a>
+  <strong>QWERTYMC</strong> · Serwer Minecraft Java 1.21.4<br>
+  Strona społeczności serwera. Minecraft jest znakiem towarowym Mojang Studios.
 </footer>
 
+<div class="toast" id="toast" role="status" aria-live="polite">
+  Skopiowano adres serwera!
+</div>
+
 <script>
-(function () {
-  const pages = ["strona", "rangi", "klucze"];
+// Menu na telefonach
+const menuBtn = document.getElementById('menuBtn');
+const navlinks = document.getElementById('navlinks');
 
-  function showPage(name, updateUrl) {
-    if (!pages.includes(name)) name = "strona";
+menuBtn.addEventListener('click', () => {
+  const open = navlinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.textContent = open ? '✕' : '☰';
+});
 
-    document.querySelectorAll(".page").forEach(function (page) {
-      page.classList.toggle("active", page.id === "page-" + name);
-    });
+navlinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navlinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.textContent = '☰';
+  });
+});
 
-    document.querySelectorAll(".tabs a").forEach(function (tab) {
-      const active = tab.dataset.page === name;
-      tab.classList.toggle("active", active);
-      if (active) tab.setAttribute("aria-current", "page");
-      else tab.removeAttribute("aria-current");
-    });
+// Kopiowanie adresu serwera
+const toast = document.getElementById('toast');
+let toastTimer;
 
-    if (updateUrl) history.replaceState(null, "", "#" + name);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+async function copyIP() {
+  const ip = 'qwertymcpl.aternos.me';
+
+  try {
+    await navigator.clipboard.writeText(ip);
+  } catch (error) {
+    const input = document.createElement('textarea');
+    input.value = ip;
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    input.remove();
   }
 
-  document.querySelectorAll(".tabs a").forEach(function (tab) {
-    tab.addEventListener("click", function (event) {
-      event.preventDefault();
-      showPage(tab.dataset.page, true);
-    });
-  });
+  toast.textContent = 'Skopiowano IP: ' + ip;
+  toast.classList.add('show');
 
-  window.addEventListener("hashchange", function () {
-    showPage(location.hash.slice(1), false);
-  });
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2200);
+}
 
-  showPage(location.hash.slice(1) || "strona", false);
+document.getElementById('copyBtn').addEventListener('click', copyIP);
+document.getElementById('copyBtnBottom').addEventListener('click', copyIP);
 
-  const button = document.getElementById("copyButton");
-  const status = document.getElementById("copyStatus");
-
-  button.addEventListener("click", async function () {
-    const address = "qwertymcpl.aternos.me";
-    try {
-      if (!navigator.clipboard || !window.isSecureContext) {
-        throw new Error("Clipboard niedostępny");
-      }
-      await navigator.clipboard.writeText(address);
-      status.textContent = "✓ Adres skopiowany do schowka!";
-    } catch (error) {
-      status.textContent = "Adres serwera: " + address;
+// Animowane pojawianie się sekcji podczas przewijania
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
     }
   });
-})();
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(element => {
+  revealObserver.observe(element);
+});
+
+// Podświetlenie aktywnej zakładki
+const sections = [...document.querySelectorAll('main section[id]')];
+const links = [...document.querySelectorAll('.navlinks a[href^="#"]')];
+
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      links.forEach(link => {
+        link.classList.toggle(
+          'active',
+          link.getAttribute('href') === '#' + entry.target.id
+        );
+      });
+    }
+  });
+}, { rootMargin: '-35% 0px -55% 0px' });
+
+sections.forEach(section => navObserver.observe(section));
 </script>
+
 </body>
 </html>
